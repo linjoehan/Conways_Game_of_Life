@@ -30,7 +30,7 @@ public class ConwaysViewer
             gamestate.print();
             if(updateframes > 0)
             {
-                //gamestate.updateFrame();
+                gamestate.updateFrame();
                 updateframes--;
             }
             else
@@ -41,6 +41,7 @@ public class ConwaysViewer
         }
     }
     
+    //Intro to the game
     private void intro()
     {
         System.out.println("Conways Game of Life by linjoehan");
@@ -49,6 +50,7 @@ public class ConwaysViewer
         scanner.nextLine();
     }
     
+    //Main menu when nothing needs to be done
     private void menu()
     {
         System.out.println(" 1 - Load predefined state");
@@ -86,7 +88,7 @@ public class ConwaysViewer
             }break;
             case 3 :
             {
-                
+                menuRunState();
             }break;
             default :
             {
@@ -166,6 +168,24 @@ public class ConwaysViewer
         }
         
         gamestate.flipState(row-1,col-1);
+    }
+    
+    private void menuRunState()
+    {
+        System.out.println("How many frames do you want to simulate:");
+        
+        int input;
+        try
+        {
+            input = scanner.nextInt();
+        }
+        catch(InputMismatchException e)
+        {
+            System.out.println("Input is not an integer");
+            scanner.nextLine();
+            return;
+        }
+        updateframes = input;
     }
     
     private void wait(int ms)

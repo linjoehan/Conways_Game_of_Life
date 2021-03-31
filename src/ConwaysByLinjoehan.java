@@ -1,5 +1,8 @@
-import java.awt.*;
-import java.io.*;
+import java.awt.Point;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.Math;
 
 public class ConwaysByLinjoehan implements ConwaysGameOfLife
 {
@@ -23,6 +26,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
         }
     }
     
+    //Prints a formatted state of the board
     public void print()
     {
         //print column numbers first row
@@ -97,6 +101,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
         System.out.println("Generation: " + generation);
     }
     
+    //flips a cell between alive and dead
     public void flipState(int row,int col)
     {
         if(0<= row && row < ROWS && 0<= col && col < COLS)
@@ -119,6 +124,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
         }
     }
     
+    //loads states from file
     public void loadFromFile(String filename)
     {
         clearstate();
@@ -160,6 +166,44 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
         }
     }
     
+    //Updates the board based on the game of life rules
+    public void updateFrame()
+    {
+        char[][] nextBoard = new char[ROWS][COLS];
+        
+        for(int row = 0;row<ROWS;row++)
+        {
+            for(int col = 0;col<COLS;col++)
+            {
+                int aliveNeighbours = countNeighbours(row,col); //counts of neighbour cells thats alive
+                
+                if(board[row][col] == ' ' && aliveNeighbours == 3) //if cell is currently dead and has 3 alive neighbours set it to alive
+                {
+                    nextBoard[row][col] = 'O';
+                }
+                else if(board[row][col] == 'O' && (aliveNeighbours < 2 || aliveNeighbours > 3)) //if cell is alive and has to few or to many alive neighbours change cell to dead
+                {
+                    nextBoard[row][col] = ' ';
+                }
+                else
+                {
+                    nextBoard[row][col] = board[row][col];
+                }
+            }
+        }
+        
+        //update board to next state
+        for(int row = 0;row<ROWS;row++)
+        {
+            for(int col = 0;col<COLS;col++)
+            {
+                board[row][col] = nextBoard[row][col];
+            }
+        }
+        
+        generation++;
+    }
+    
     public boolean liveCellWithFewerThanTwoLiveNeighboursDies(Point point)
     {
         return false;
@@ -180,6 +224,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
         return false;
     }
     
+    //sets all cells to dead
     private void clearstate()
     {
         for(int row = 0;row<ROWS;row++)
@@ -190,4 +235,31 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
             }
         }
     }
+    
+    //counts alive neighbours to a cell
+    private int countNeighbours(int row,int col)
+    {
+        int res = 0;
+        for(int row_delta = -1;row_delta<=1;row_delta++)
+        {
+            for(int col_delta = -1;col_delta<=1;col_delta++)
+            {
+                if(Math.abs(row_delta) + Math.abs(col_delta) > 0)
+                {
+                    int target_row = row + row_delta;
+                    int target_col = col + col_delta;
+                    
+                    if(0<= target_row && target_row < ROWS && 0<= target_col && target_col < COLS)
+                    {
+                        if(board[target_row][target_col] == 'O')
+                        {
+                            res++;
+                        }
+                    }
+                }
+            }
+        }
+        return res;
+    }
+    
 }
