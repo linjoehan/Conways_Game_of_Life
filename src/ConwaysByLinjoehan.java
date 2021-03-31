@@ -206,22 +206,38 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
     
     public boolean liveCellWithFewerThanTwoLiveNeighboursDies(Point point)
     {
-        return false;
+        int row = point.y;
+        int col = point.x;
+        int aliveNeighbours = countNeighbours(row,col);
+        
+        return (board[row][col]== 'O' && aliveNeighbours < 2);
     }
     
     public boolean liveCellWithTwoOrThreeLiveNeighboursLives(Point point)
     {
-        return false;
+        int row = point.y;
+        int col = point.x;
+        int aliveNeighbours = countNeighbours(row,col);
+        
+        return (board[row][col]== 'O' && 2<= aliveNeighbours && aliveNeighbours <= 3);
     }
     
     public boolean liveCellWithMoreThanThreeLiveNeighboursDies(Point point)
     {
-        return false;
+        int row = point.y;
+        int col = point.x;
+        int aliveNeighbours = countNeighbours(row,col);
+        
+        return (board[row][col]== 'O' && aliveNeighbours > 3);
     }
     
     public boolean deadCellWithExactlyThreeLiveNeighboursBecomesAlive(Point point)
     {
-        return false;
+        int row = point.y;
+        int col = point.x;
+        int aliveNeighbours = countNeighbours(row,col);
+        
+        return (board[row][col]== ' ' && aliveNeighbours == 3);
     }
     
     //sets all cells to dead
