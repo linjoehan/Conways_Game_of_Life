@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.Math;
+import java.util.Random;
 
 public class ConwaysByLinjoehan implements ConwaysGameOfLife
 {
@@ -166,6 +167,29 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
         {
             System.out.println("Could not read file");
             return;
+        }
+    }
+    
+    public void fillRandom()
+    {
+        Random rand = new Random();
+        for(int row = 0;row<ROWS;row++)
+        {
+            for(int col = 0;col<COLS;col++)
+            {
+                int a = rand.nextInt(2);
+                switch(a)
+                {
+                    case 0:
+                    {
+                        board[row][col] = ' ';
+                    }break;
+                    case 1:
+                    {
+                        board[row][col] = 'O';
+                    }break;
+                }
+            }
         }
     }
     

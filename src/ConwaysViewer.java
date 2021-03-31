@@ -101,6 +101,7 @@ public class ConwaysViewer
     private void menuLoadState()
     {
         System.out.println("States:");
+        System.out.println(" 0 - Randomly fill state");
         System.out.println(" 1 - Still life forms");
         System.out.println(" 2 - Oscillators");
         System.out.println(" 3 - Glider gun");
@@ -122,6 +123,10 @@ public class ConwaysViewer
         
         switch(option)
         {
+            case 0:
+            {
+                gamestate.fillRandom();
+            }break;
             case 1:
             {
                 gamestate.loadFromFile("./loadstates/still_life.txt");
