@@ -37,7 +37,7 @@ public class ConwaysViewer
             {
                 menu();
             }
-            wait(1000);
+            wait(200);
         }
     }
     
@@ -103,6 +103,8 @@ public class ConwaysViewer
         System.out.println("States:");
         System.out.println(" 1 - Still life forms");
         System.out.println(" 2 - Oscillators");
+        System.out.println(" 3 - Glider gun");
+        System.out.println(" 4 - Glider gun and Eater");
         
         System.out.println("Enter State to load:");
         
@@ -127,6 +129,14 @@ public class ConwaysViewer
             case 2:
             {
                 gamestate.loadFromFile("./loadstates/oscillators.txt");
+            }break;
+            case 3:
+            {
+                gamestate.loadFromFile("./loadstates/glidergun.txt");
+            }break;
+            case 4:
+            {
+                gamestate.loadFromFile("./loadstates/glidergun_and_eater.txt");
             }break;
             default:
             {
