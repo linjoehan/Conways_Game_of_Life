@@ -6,18 +6,18 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
     final static int COLS = 60;
     
     private int generation;
-    private char[][] gamestate;
+    private char[][] board;
     
     public ConwaysByLinjoehan()
     {
         generation = 0;
-        gamestate = new char[ROWS][COLS];
+        board = new char[ROWS][COLS];
         
         for(int row = 0;row<ROWS;row++)
         {
             for(int col = 0;col<COLS;col++)
             {
-                gamestate[row][col] = ' ';
+                board[row][col] = ' ';
             }
         }
     }
@@ -80,7 +80,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
             System.out.print("|");
             for(int col = 0;col<COLS;col++)
             {
-                System.out.print(gamestate[row][col]);
+                System.out.print(board[row][col]);
             }
             System.out.print("|\n");
         }
@@ -94,6 +94,28 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
         System.out.print("+\n");
         
         System.out.println("Generation: " + generation);
+    }
+    
+    public void flipState(int row,int col)
+    {
+        if(0<= row && row < ROWS && 0<= col && col < COLS)
+        {
+            switch (board[row][col])
+            {
+                case ' ':
+                {
+                    board[row][col] = 'O';
+                }break;
+                case 'O':
+                {
+                    board[row][col] = ' ';
+                }break;
+            }
+        }
+        else
+        {
+            System.out.println("ERROR: Row and Column is not within the bounds of the board");
+        }
     }
     
     public boolean liveCellWithFewerThanTwoLiveNeighboursDies(Point point)

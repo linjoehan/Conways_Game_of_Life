@@ -64,6 +64,7 @@ public class ConwaysViewer
         catch(InputMismatchException e)
         {
             System.out.println("Input is not a recognised option");
+            scanner.nextLine();
             return;
         }
         
@@ -80,7 +81,7 @@ public class ConwaysViewer
             }break;
             case 2 :
             {
-                
+                menuEditState();
             }break;
             case 3 :
             {
@@ -89,8 +90,43 @@ public class ConwaysViewer
             default :
             {
                 System.out.println("Input is not a recognised option");
+                scanner.nextLine();
             }
         }
+    }
+    
+    private void menuEditState()
+    {
+        int row;int col;
+        System.out.println("Flip the state of");
+        
+        //Get row
+        System.out.print("Row:");
+        try
+        {
+            row = scanner.nextInt();
+        }
+        catch(InputMismatchException e)
+        {
+            System.out.println("Input is not an integer");
+            scanner.nextLine();
+            return;
+        }
+        
+        //Get column
+        System.out.print("Row:");
+        try
+        {
+            col = scanner.nextInt();
+        }
+        catch(InputMismatchException e)
+        {
+            System.out.println("Input is not an integer");
+            scanner.nextLine();
+            return;
+        }
+        
+        gamestate.flipState(row-1,col-1);
     }
     
     private void wait(int ms)
