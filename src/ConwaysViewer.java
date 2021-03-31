@@ -56,6 +56,7 @@ public class ConwaysViewer
         System.out.println(" 3 - Run simulation for a selected number of frames");
         System.out.println(" 0 - Exit");
         System.out.print("Enter Option number:");
+        
         int option;
         try
         {
@@ -63,7 +64,7 @@ public class ConwaysViewer
         }
         catch(InputMismatchException e)
         {
-            System.out.println("Input is not a recognised option");
+            System.out.println("Input is not an integer");
             scanner.nextLine();
             return;
         }
@@ -77,7 +78,7 @@ public class ConwaysViewer
             }break;
             case 1 :
             {
-                
+                menuLoadState();
             }break;
             case 2 :
             {
@@ -88,6 +89,44 @@ public class ConwaysViewer
                 
             }break;
             default :
+            {
+                System.out.println("Input is not a recognised option");
+                scanner.nextLine();
+            }
+        }
+    }
+    
+    private void menuLoadState()
+    {
+        System.out.println("States:");
+        System.out.println(" 1 - Still life forms");
+        System.out.println(" 2 - Oscillators");
+        
+        System.out.println("Enter State to load:");
+        
+        int option;
+        try
+        {
+            option = scanner.nextInt();
+        }
+        catch(InputMismatchException e)
+        {
+            System.out.println("Input is not an integer");
+            scanner.nextLine();
+            return;
+        }
+        
+        switch(option)
+        {
+            case 1:
+            {
+                gamestate.loadFromFile("./loadstates/still_life.txt");
+            }break;
+            case 2:
+            {
+                gamestate.loadFromFile("./loadstates/oscillators.txt");
+            }break;
+            default:
             {
                 System.out.println("Input is not a recognised option");
                 scanner.nextLine();

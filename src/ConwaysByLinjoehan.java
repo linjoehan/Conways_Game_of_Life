@@ -1,9 +1,10 @@
 import java.awt.*;
+import java.io.*;
 
 public class ConwaysByLinjoehan implements ConwaysGameOfLife
 {
     final static int ROWS = 30;
-    final static int COLS = 60;
+    final static int COLS = 80;
     
     private int generation;
     private char[][] board;
@@ -118,6 +119,47 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
         }
     }
     
+    public void loadFromFile(String filename)
+    {
+        clearstate();
+        
+        BufferedReader fileReader;
+        try
+        {
+            fileReader = new BufferedReader(new FileReader(filename));
+            String line = fileReader.readLine();
+            for(int row = 0;line != null && row < ROWS;row++)
+            {
+                if(line.length() != COLS)
+                {
+                    System.out.println("WARN: Input file is not the correct size a truncated state will be loaded");
+                }
+                for(int col = 0;col < line.length() && col < COLS;col++)
+                {
+                    switch(line.charAt(col))
+                    {
+                        case ' ':
+                        case 'O':
+                        {
+                            board[row][col] = line.charAt(col);
+                        }break;
+                        default:
+                        {
+                            System.out.println("ERROR: input file is not is the correct format");
+                        }
+                    }
+                }
+                
+                line = fileReader.readLine();
+            }
+        }
+        catch(IOException e)
+        {
+            System.out.println("Could not read file");
+            return;
+        }
+    }
+    
     public boolean liveCellWithFewerThanTwoLiveNeighboursDies(Point point)
     {
         return false;
@@ -136,5 +178,16 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
     public boolean deadCellWithExactlyThreeLiveNeighboursBecomesAlive(Point point)
     {
         return false;
+    }
+    
+    private void clearstate()
+    {
+        for(int row = 0;row<ROWS;row++)
+        {
+            for(int col = 0;col < COLS;col++)
+            {
+                board[row][col] = ' ';
+            }
+        }
     }
 }
