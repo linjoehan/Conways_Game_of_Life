@@ -29,48 +29,49 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
     //Prints a formatted state of the board
     public void print()
     {
+        String outputBuffer = "";
         //print column numbers first row
-        System.out.print("  ");
+        outputBuffer += "  ";
         for(int i = 0;i<COLS+1;i++)
         {
             if(i==0)
             {
-                System.out.print(" ");
+                outputBuffer += " ";
             }
             else if(i<10)
             {
-                System.out.print(" ");
+                outputBuffer += " ";
             }
             else
             {
-                System.out.print(i/10);
+                outputBuffer += Integer.toString(i/10);
             }
         }
-        System.out.print("\n");
+        outputBuffer += "\n";
         
         //print column numbers in second row
-        System.out.print("  ");
+        outputBuffer += "  ";
         for(int i = 0;i<COLS+1;i++)
         {
             if(i==0)
             {
-                System.out.print(" ");
+                outputBuffer += " ";
             }
             else
             {
-                System.out.print(i%10);
+                outputBuffer += Integer.toString(i%10);
             }
         }
-        System.out.print("\n");
+        outputBuffer += "\n";
         
         
         //Top boarder
-        System.out.print("  +");
+        outputBuffer += "  +";
         for(int i = 0;i<COLS;i++)
         {
-            System.out.print("-");
+            outputBuffer += "-";
         }
-        System.out.print("+\n");
+        outputBuffer += "+\n";
         
         //board state
         for(int row = 0;row<ROWS;row++)
@@ -78,27 +79,29 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
             //Print row numbers
             if(row + 1<10)
             {
-                System.out.print(" ");
+                outputBuffer += " ";
             }
-            System.out.print(row+1);
+            outputBuffer += Integer.toString(row+1);
             
-            System.out.print("|");
+            outputBuffer += "|";
             for(int col = 0;col<COLS;col++)
             {
-                System.out.print(board[row][col]);
+                outputBuffer += board[row][col];
             }
-            System.out.print("|\n");
+            outputBuffer += "|\n";
         }
         
         //Bottom boarder
-        System.out.print("  +");
+        outputBuffer += "  +";
         for(int i = 0;i<COLS;i++)
         {
-            System.out.print("-");
+            outputBuffer += "-";
         }
-        System.out.print("+\n");
+        outputBuffer += "+\n";
         
-        System.out.println("Generation: " + generation);
+        outputBuffer += "Generation: " + Integer.toString(generation);
+        
+        System.out.println(outputBuffer);
     }
     
     //flips a cell between alive and dead
