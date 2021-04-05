@@ -305,4 +305,17 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
         return res;
     }
     
+    //Game of life states are considered equal when the board is in the same state
+    boolean equals(ConwaysByLinjoehan state)
+    {
+        boolean res = true;
+        for(int row = 0;row<ROWS && res;row++)
+        {
+            for(int col = 0;col<COLS && res;col++)
+            {
+                res = state.board[row][col] == board[row][col];
+            }
+        }
+        return res;
+    }
 }
