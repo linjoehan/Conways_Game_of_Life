@@ -11,7 +11,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
     final static int COLS = 80;
     
     private int generation;
-    boolean[][] board;
+    private boolean[][] board;
     
     public ConwaysByLinjoehan()
     {
@@ -261,7 +261,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
     }
     
     //sets all cells to dead
-    private void clearstate()
+    public void clearstate()
     {
         for(int row = 0;row<ROWS;row++)
         {
@@ -299,7 +299,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
     }
     
     //Game of life states are considered equal when the board is in the same state
-    boolean equals(ConwaysByLinjoehan state)
+    public boolean equals(ConwaysByLinjoehan state)
     {
         boolean res = true;
         for(int row = 0;row<ROWS && res;row++)

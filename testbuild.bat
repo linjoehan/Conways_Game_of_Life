@@ -5,7 +5,7 @@ set CLASSPATH=C:\Junit\junit-4.10.jar;%CLASSPATH%
 javac ^
 -cp %CLASSPATH% ^
 -d ./testbin/ ^
--sourcepath ./testsrc/ ^
+-sourcepath ./src;./testsrc/ ^
 ./testsrc/*.java
 
 pause
