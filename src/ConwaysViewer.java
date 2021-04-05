@@ -92,7 +92,7 @@ public class ConwaysViewer
             }break;
             default :
             {
-                System.out.println("Input is not a recognised option");
+                errorInput("Input is not a recognised option");
                 scanner.nextLine();
             }
         }
@@ -116,7 +116,7 @@ public class ConwaysViewer
         }
         catch(InputMismatchException e)
         {
-            System.out.println("Input is not an integer");
+            errorInput("Input is not an integer");
             scanner.nextLine();
             return;
         }
@@ -145,7 +145,7 @@ public class ConwaysViewer
             }break;
             default:
             {
-                System.out.println("Input is not a recognised option");
+                errorInput("Input is not a recognised option");
                 scanner.nextLine();
             }
         }
@@ -164,7 +164,7 @@ public class ConwaysViewer
         }
         catch(InputMismatchException e)
         {
-            System.out.println("Input is not an integer");
+            errorInput("Input is not an integer");
             scanner.nextLine();
             return;
         }
@@ -177,7 +177,7 @@ public class ConwaysViewer
         }
         catch(InputMismatchException e)
         {
-            System.out.println("Input is not an integer");
+            errorInput("Input is not an integer");
             scanner.nextLine();
             return;
         }
@@ -196,11 +196,17 @@ public class ConwaysViewer
         }
         catch(InputMismatchException e)
         {
-            System.out.println("Input is not an integer");
+            errorInput("Input is not an integer");
             scanner.nextLine();
             return;
         }
         updateframes = input;
+    }
+    
+    private void errorInput(String message)
+    {
+        System.out.println(message);
+        wait(800);
     }
     
     private void wait(int ms)
