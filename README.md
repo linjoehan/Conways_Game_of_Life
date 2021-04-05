@@ -7,3 +7,12 @@ This project includes a build.bat file which builds the project into a bin direc
 
 **Run**
 This project includes a run.bat file which runs the project once it has been built. As before you will either need to set up your local environment variables or edit the set PATH in the run.bat file.
+
+**UNIT TESTS**
+Testing is done with junit 4.12 which can be downloaded [here](https://github.com/downloads/junit-team/junit/junit-4.12.jar) Setting up Junit can be done by following the instructions [here](https://www.tutorialspoint.com/junit/junit_environment_setup.htm)
+
+**Building Unit Tests**
+The testbuild.bat file builds the test classes into a testbin directory, As before you may have to edit the environment variables in the file if your local variables are not set.
+
+**Running Unit Tests**
+The testrun.bat file runs the unit tests once the test classes have been built. As before you may have to edit the environment variables in the file if your local variables are not set.
