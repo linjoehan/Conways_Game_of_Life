@@ -11,18 +11,18 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
     final static int COLS = 80;
     
     private int generation;
-    private char[][] board;
+    boolean[][] board;
     
     public ConwaysByLinjoehan()
     {
         generation = 0;
-        board = new char[ROWS][COLS];
+        board = new boolean[ROWS][COLS];
         
         for(int row = 0;row<ROWS;row++)
         {
             for(int col = 0;col<COLS;col++)
             {
-                board[row][col] = ' ';
+                board[row][col] = false;
             }
         }
     }
@@ -87,7 +87,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
             outputBuffer += "|";
             for(int col = 0;col<COLS;col++)
             {
-                outputBuffer += board[row][col];
+                outputBuffer += (board[row][col] ? "O" : " ");
             }
             outputBuffer += "|\n";
         }
@@ -110,17 +110,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
     {
         if(0<= row && row < ROWS && 0<= col && col < COLS)
         {
-            switch (board[row][col])
-            {
-                case ' ':
-                {
-                    board[row][col] = 'O';
-                }break;
-                case 'O':
-                {
-                    board[row][col] = ' ';
-                }break;
-            }
+            board[row][col] = !board[row][col];
         }
         else
         {
@@ -149,9 +139,12 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
                     switch(line.charAt(col))
                     {
                         case ' ':
+                        {
+                            board[row][col] = false;
+                        }break;
                         case 'O':
                         {
-                            board[row][col] = line.charAt(col);
+                            board[row][col] = true;
                         }break;
                         default:
                         {
@@ -182,11 +175,11 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
                 {
                     case 0:
                     {
-                        board[row][col] = ' ';
+                        board[row][col] = false;
                     }break;
                     case 1:
                     {
-                        board[row][col] = 'O';
+                        board[row][col] = true;
                     }break;
                 }
             }
@@ -196,7 +189,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
     //Updates the board based on the game of life rules
     public void updateFrame()
     {
-        char[][] nextBoard = new char[ROWS][COLS];
+        boolean[][] nextBoard = new boolean[ROWS][COLS];
         
         for(int row = 0;row<ROWS;row++)
         {
@@ -204,13 +197,13 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
             {
                 int aliveNeighbours = countNeighbours(row,col); //counts of neighbour cells thats alive
                 
-                if(board[row][col] == ' ' && aliveNeighbours == 3) //if cell is currently dead and has 3 alive neighbours set it to alive
+                if(board[row][col] == false && aliveNeighbours == 3) //if cell is currently dead and has 3 alive neighbours set it to alive
                 {
-                    nextBoard[row][col] = 'O';
+                    nextBoard[row][col] = true;
                 }
-                else if(board[row][col] == 'O' && (aliveNeighbours < 2 || aliveNeighbours > 3)) //if cell is alive and has to few or to many alive neighbours change cell to dead
+                else if(board[row][col] == true && (aliveNeighbours < 2 || aliveNeighbours > 3)) //if cell is alive and has to few or to many alive neighbours change cell to dead
                 {
-                    nextBoard[row][col] = ' ';
+                    nextBoard[row][col] = false;
                 }
                 else
                 {
@@ -237,7 +230,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
         int col = point.x;
         int aliveNeighbours = countNeighbours(row,col);
         
-        return (board[row][col]== 'O' && aliveNeighbours < 2);
+        return (board[row][col]== true && aliveNeighbours < 2);
     }
     
     public boolean liveCellWithTwoOrThreeLiveNeighboursLives(Point point)
@@ -246,7 +239,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
         int col = point.x;
         int aliveNeighbours = countNeighbours(row,col);
         
-        return (board[row][col]== 'O' && 2<= aliveNeighbours && aliveNeighbours <= 3);
+        return (board[row][col]== true && 2<= aliveNeighbours && aliveNeighbours <= 3);
     }
     
     public boolean liveCellWithMoreThanThreeLiveNeighboursDies(Point point)
@@ -255,7 +248,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
         int col = point.x;
         int aliveNeighbours = countNeighbours(row,col);
         
-        return (board[row][col]== 'O' && aliveNeighbours > 3);
+        return (board[row][col]== true && aliveNeighbours > 3);
     }
     
     public boolean deadCellWithExactlyThreeLiveNeighboursBecomesAlive(Point point)
@@ -264,7 +257,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
         int col = point.x;
         int aliveNeighbours = countNeighbours(row,col);
         
-        return (board[row][col]== ' ' && aliveNeighbours == 3);
+        return (board[row][col]== false && aliveNeighbours == 3);
     }
     
     //sets all cells to dead
@@ -274,7 +267,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
         {
             for(int col = 0;col < COLS;col++)
             {
-                board[row][col] = ' ';
+                board[row][col] = false;
             }
         }
     }
@@ -294,7 +287,7 @@ public class ConwaysByLinjoehan implements ConwaysGameOfLife
                     
                     if(0<= target_row && target_row < ROWS && 0<= target_col && target_col < COLS)
                     {
-                        if(board[target_row][target_col] == 'O')
+                        if(board[target_row][target_col] == true)
                         {
                             res++;
                         }
